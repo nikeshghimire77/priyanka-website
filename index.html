@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Myofunctional Therapy - Better Breathing, Better Sleep</title>
+    <meta name="description"
+        content="Expert myofunctional therapy to improve breathing, sleep, and oral function. Book your free consultation today.">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Functions defined immediately -->
+    <script>
+        function openModal() {
+            const modal = document.getElementById('consultationModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                modal.style.visibility = 'visible';
+                modal.style.opacity = '1';
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('consultationModal');
+            if (modal) {
+                modal.classList.remove('active');
+                modal.style.display = 'none';
+                modal.style.visibility = 'hidden';
+                modal.style.opacity = '0';
+                document.body.style.overflow = '';
+            }
+        }
+
+        function openSelfCheckModal() {
+            const modal = document.getElementById('selfCheckModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                modal.style.visibility = 'visible';
+                modal.style.opacity = '1';
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeSelfCheckModal() {
+            const modal = document.getElementById('selfCheckModal');
+            if (modal) {
+                modal.classList.remove('active');
+                modal.style.display = 'none';
+                modal.style.visibility = 'hidden';
+                modal.style.opacity = '0';
+                document.body.style.overflow = '';
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert('Thank you! We will contact you soon to schedule your consultation.');
+            closeModal();
+            event.target.reset();
+        }
+
+        function calculateScore() {
+            const checkboxes = document.querySelectorAll('#selfCheckModal input[type="checkbox"]:checked');
+            const score = checkboxes.length;
+
+            document.getElementById('scoreNumber').textContent = score;
+
+            let recommendation = '';
+            let recommendationText = '';
+
+            if (score === 0) {
+                recommendation = 'Great News!';
+                recommendationText = 'Based on your responses, you appear to have healthy breathing and oral function patterns. Keep up the good work!';
+            } else if (score >= 1 && score <= 3) {
+                recommendation = 'Mild Concerns';
+                recommendationText = 'You may benefit from a consultation to discuss some breathing or oral function patterns. Early intervention can prevent future issues.';
+            } else if (score >= 4 && score <= 7) {
+                recommendation = 'Moderate Concerns';
+                recommendationText = 'Your responses suggest several areas where myofunctional therapy could be beneficial. We recommend scheduling a consultation to discuss your specific needs.';
+            } else if (score >= 8) {
+                recommendation = 'Significant Concerns';
+                recommendationText = 'Your responses indicate multiple areas that could benefit from myofunctional therapy. We strongly recommend scheduling a consultation to create a personalized treatment plan.';
+            }
+
+            const recommendationDiv = document.getElementById('recommendation');
+            recommendationDiv.innerHTML = `
+                <h4>${recommendation}</h4>
+                <p>${recommendationText}</p>
+            `;
+
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background circle with gradient -->
+                            <defs>
+                                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="breathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:0.8" />
+                                    <stop offset="50%" style="stop-color:#8B5CF6;stop-opacity:0.6" />
+                                    <stop offset="100%" style="stop-color:#06B6D4;stop-opacity:0.4" />
+                                </linearGradient>
+                            </defs>
+
+                            <!-- Main circle background -->
+                            <circle cx="32" cy="32" r="30" fill="url(#logoGradient)" opacity="0.1" />
+                            <circle cx="32" cy="32" r="28" fill="none" stroke="url(#logoGradient)" stroke-width="2"
+                                opacity="0.3" />
+
+                            <!-- Breathing waves (representing airflow) -->
+                            <path d="M8 32 Q16 20 24 32 T40 32 T56 32" stroke="url(#breathGradient)" stroke-width="3"
+                                fill="none" stroke-linecap="round" />
+                            <path d="M12 32 Q20 24 28 32 T44 32 T60 32" stroke="url(#breathGradient)" stroke-width="2"
+                                fill="none" stroke-linecap="round" opacity="0.7" />
+                            <path d="M16 32 Q24 28 32 32 T48 32 T64 32" stroke="url(#breathGradient)" stroke-width="1.5"
+                                fill="none" stroke-linecap="round" opacity="0.5" />
+
+                            <!-- Central M letter (Modern Myofunctional) -->
+                            <path
+                                d="M20 18 L20 46 L26 46 L26 28 L30 38 L34 28 L34 46 L40 46 L40 18 L34 18 L30 28 L26 18 Z"
+                                fill="url(#logoGradient)" />
+
+                            <!-- Medical cross symbol -->
+                            <g transform="translate(32, 12)">
+                                <circle cx="0" cy="0" r="4" fill="url(#logoGradient)" opacity="0.8" />
+                                <path
+                                    d="M-2 -6 L2 -6 M0 -8 L0 -4 M-6 -2 L6 -2 M-8 0 L8 0 M-6 2 L6 2 M-2 6 L2 6 M0 4 L0 8"
+                                    stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                            </g>
+
+                            <!-- Wellness dots (representing health benefits) -->
+                            <circle cx="50" cy="20" r="2" fill="url(#logoGradient)" opacity="0.8" />
+                            <circle cx="54" cy="24" r="1.5" fill="url(#logoGradient)" opacity="0.6" />
+                            <circle cx="52" cy="28" r="1" fill="url(#logoGradient)" opacity="0.4" />
+
+                            <!-- Subtle airflow indicators -->
+                            <circle cx="14" cy="20" r="1.5" fill="url(#logoGradient)" opacity="0.5" />
+                            <circle cx="18" cy="16" r="1" fill="url(#logoGradient)" opacity="0.3" />
+                            <circle cx="16" cy="12" r="0.8" fill="url(#logoGradient)" opacity="0.2" />
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-main">Modern</span>
+                        <span class="logo-sub">Myofunctional Therapy</span>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="#services" class="nav-link">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-4m-8 0V9a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m-6 0h6" />
+                    </svg>
+                    <span>Services</span>
+                </a>
+                <a href="#about" class="nav-link">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    <span>About</span>
+                </a>
+                <a href="#contact" class="nav-link">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                    <span>Contact</span>
+                </a>
+                <button class="btn-primary nav-cta" onclick="openModal()">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8 2v4" />
+                        <path d="M16 2v4" />
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <path d="M3 10h18" />
+                    </svg>
+                    <span>Book Free Consultation</span>
+                </button>
+            </div>
+            <div class="mobile-menu-toggle" id="mobileToggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Modern Myofunctional Therapy for Better Breathing, Sleep, and Smile</h1>
+                <p class="hero-subtitle">We help children, teens, and adults retrain the tongue, lips, and breathing
+                    patterns with gentle exercises and daily habits—so you feel rested, speak clearly, and support
+                    long-term oral health.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary btn-large" onclick="openModal()" id="testButton">Book a
+                        Consultation</button>
+                    <button class="btn-secondary btn-large" onclick="openSelfCheckModal()">Take the 60-second
+                        self-check</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Benefits Section -->
+    <section class="quick-benefits">
+        <div class="container">
+            <div class="modern-benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-visual">
+                        <div class="benefit-icon-modern">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                                <path d="M9 9h.01" />
+                                <path d="M15 9h.01" />
+                            </svg>
+                        </div>
+                        <div class="benefit-accent"></div>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Breathe Easier</h3>
+                        <p>Day & night breathing improvements through proper tongue posture and nasal breathing
+                            techniques.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-visual">
+                        <div class="benefit-icon-modern">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                <polyline points="3.27,6.96 12,12.01 20.73,6.96" />
+                                <line x1="12" y1="22.08" x2="12" y2="12" />
+                            </svg>
+                        </div>
+                        <div class="benefit-accent"></div>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Deeper Sleep</h3>
+                        <p>More restful sleep through improved breathing patterns and reduced airway obstructions.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-visual">
+                        <div class="benefit-icon-modern">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12l2 2 4-4" />
+                                <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3" />
+                                <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3" />
+                                <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3" />
+                                <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3" />
+                            </svg>
+                        </div>
+                        <div class="benefit-accent"></div>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Orthodontic Support</h3>
+                        <p>Maintain and enhance orthodontic results with proper muscle function and tongue positioning.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-visual">
+                        <div class="benefit-icon-modern">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                <path d="M9 12l2 2 4-4" />
+                            </svg>
+                        </div>
+                        <div class="benefit-accent"></div>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Reduce Snoring</h3>
+                        <p>Minimize mouth breathing and snoring through strengthened airway muscles and proper
+                            positioning.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Strip -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="social-proof-content">
+                <div class="testimonial-quote">
+                    <p>"R., 9 years old—went from frequent mouth breathing and restless nights to nasal breathing most
+                        of the day, with calmer sleep and better morning energy."</p>
+                </div>
+                <div class="partner-logos">
+                    <div class="logo-item">Dental Partners</div>
+                    <div class="logo-item">Orthodontic Associates</div>
+                    <div class="logo-item">ENT Specialists</div>
+                    <div class="logo-item">Speech Therapists</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Is Myofunctional Therapy Section -->
+    <section id="what-is" class="what-is">
+        <div class="container">
+            <h2 class="section-title">What Is Myofunctional Therapy?</h2>
+            <div class="what-is-content">
+                <div class="explanation">
+                    <p>Myofunctional therapy is guided training for the muscles of the face, tongue, and mouth. We teach
+                        you (or your child) how to rest the tongue in the right place, seal the lips, breathe through
+                        the nose, and swallow comfortably. Small, daily practices build new muscle memory and healthier
+                        habits. It's gentle, non-invasive, and fits into real life.</p>
+                </div>
+                <div class="who-it-helps">
+                    <h3>Who it can help:</h3>
+                    <ul class="help-list">
+                        <li>Mouth breathing, open-mouth posture</li>
+                        <li>Snoring, restless sleep, daytime fatigue</li>
+                        <li>Tongue-tie pre/post-release support (with your provider)</li>
+                        <li>Orthodontic prep/retention (reducing relapse risk)</li>
+                        <li>TMJ tension, clenching, headaches</li>
+                        <li>Speech clarity support (in collaboration with SLPs)</li>
+                    </ul>
+                </div>
+                <div class="disclaimer">
+                    <p><em>We don't diagnose medical conditions. We collaborate with your dentist, orthodontist, ENT, or
+                            SLP as needed.</em></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Help Section -->
+    <section id="who-we-help" class="who-we-help">
+        <div class="container">
+            <h2 class="section-title">Who We Help</h2>
+            <div class="help-grid">
+                <div class="help-card">
+                    <div class="help-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            <path d="M6 21v-2a4 4 0 0 1 4-4h.5" />
+                        </svg>
+                    </div>
+                    <h3>Kids (4–12)</h3>
+                    <p>Make nasal breathing and healthy tongue posture the default. Better sleep and focus often follow.
+                    </p>
+                </div>
+                <div class="help-card">
+                    <div class="help-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <h3>Teens</h3>
+                    <p>Protect new orthodontic results and improve facial balance with consistent habits.</p>
+                </div>
+                <div class="help-card">
+                    <div class="help-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </div>
+                    <h3>Adults</h3>
+                    <p>Feel less jaw tension, breathe easier at night, and finally address long-standing mouth
+                        breathing.</p>
+                </div>
+                <div class="help-card">
+                    <div class="help-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                        </svg>
+                    </div>
+                    <h3>Athletes/Performers</h3>
+                    <p>Breathing efficiency and stable oral posture can support endurance and voice quality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Discovery Call (15–20 min)</h3>
+                        <p>Share your goals and history. We explain options and next steps.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Assessment Visit</h3>
+                        <p>We review breathing, posture, tongue and lip function, and sleep/orthodontic history. You'll
+                            leave with a simple starting routine.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Custom Program</h3>
+                        <p>Weekly or bi-weekly sessions (virtual or in-person), 5–10 minutes of daily practice, progress
+                            check-ins every 4–6 weeks.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Collaboration</h3>
+                        <p>We coordinate with your dentist, orthodontist, ENT, or SLP when needed.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Graduation & Maintenance</h3>
+                        <p>A clear plan to keep results, plus check-ins if you want them.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="session-expectations">
+                <h3>What to expect each session:</h3>
+                <p>Coaching, form checks, habit stacking tips, and small upgrades—not endless exercises.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs & Timeline Section -->
+    <section id="programs" class="programs">
+        <div class="container">
+            <h2 class="section-title">Programs & Timeline</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3>Starter</h3>
+                        <div class="program-duration">4–6 weeks</div>
+                    </div>
+                    <p>Great for simple habit training or post-procedure support.</p>
+                </div>
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <h3>Core</h3>
+                        <div class="program-duration">10–16 weeks</div>
+                    </div>
+                    <p>Full habit change, ideal for mouth breathing, mild snoring, ortho prep/retention.</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3>Advanced</h3>
+                        <div class="program-duration">4–6 months</div>
+                    </div>
+                    <p>Complex patterns, long-standing issues, multi-provider care.</p>
+                </div>
+            </div>
+            <div class="milestones">
+                <h3>Typical milestones:</h3>
+                <div class="milestone-timeline">
+                    <div class="milestone">
+                        <div class="milestone-period">Weeks 2–4</div>
+                        <div class="milestone-description">easier nasal breathing, fewer dry mouth moments</div>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-period">Weeks 6–8</div>
+                        <div class="milestone-description">more stable tongue rest, better sleep quality</div>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-period">Weeks 10–16</div>
+                        <div class="milestone-description">automatic habits, improved jaw comfort and compliance</div>
+                    </div>
+                </div>
+                <p class="timeline-note"><em>(Timelines vary—your plan is personalized.)</em></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">About Priyanka Neupane, BS, RDH, OMT</h2>
+
+                    <div class="about-main">
+                        <p class="about-description">
+                            I'm Priyanka Neupane, BS, RDH, OMT—a clinical dental hygienist and orofacial myofunctional
+                            therapist.
+                            In practice, I met so many patients who were struggling with mouth breathing, snoring, jaw
+                            tension,
+                            or orthodontic relapse. Those visits inspired me to specialize in myofunctional therapy, a
+                            coaching-based approach that retrains tongue, lip, and breathing patterns with small daily
+                            habits.
+                        </p>
+
+                        <p class="about-description">
+                            My style is calm, practical, and family-friendly. We start with a simple assessment and
+                            clear goals,
+                            then build short routines that fit real life—usually just a few minutes a day. I collaborate
+                            closely
+                            with dentists, orthodontists, ENTs, and speech-language pathologists so your plan supports
+                            ongoing
+                            care like orthodontics, tongue-tie treatment, speech goals, and TMJ comfort. The aim is
+                            lasting change:
+                            easier nasal breathing, deeper sleep, and a more stable, confident smile.
+                        </p>
+                    </div>
+
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <h4>Credentials & Training</h4>
+                            <p>BS, RDH, OMT • Advanced training in orofacial myofunctional therapy • AOMT/IAOM/AAOSH
+                                member • CPR/BLS certified</p>
+                        </div>
+
+                        <div class="highlight-item">
+                            <h4>Who I Help</h4>
+                            <p>Children, teens, and adults seeking easier nasal breathing, steadier oral posture, better
+                                sleep quality, jaw comfort, and support for orthodontic results.</p>
+                        </div>
+
+                        <div class="highlight-item">
+                            <h4>My Approach</h4>
+                            <p>Gentle coaching over "perfect" exercises • Short, doable routines that build real habits
+                                • Team-based care with your providers • Education you can actually use at home</p>
+                        </div>
+                    </div>
+
+
+                    <div class="about-cta">
+                        <p><strong>Ready to get started?</strong> Book a consultation or a free 15-minute discovery
+                            call.</p>
+                        <button class="btn-primary" onclick="openModal()">Book Free Consultation</button>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="professional-photo">
+                        <img src="assets/img/priyanka.jpeg"
+                            alt="Priyanka Neupane, BS, RDH, OMT - Myofunctional Therapist" class="about-photo">
+                        <div class="photo-overlay">
+                            <div class="credentials-badge">
+                                <span class="credential-title">BS, RDH, OMT</span>
+                                <span class="credential-subtitle">Myofunctional Therapist</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problems Section -->
+    <section class="problems">
+        <div class="container">
+            <h2 class="section-title">Problems We Help</h2>
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+                            <path d="M8 12h8" />
+                            <path d="M12 8v8" />
+                        </svg>
+                    </div>
+                    <h3>Mouth Breathing</h3>
+                    <p>Retrain your breathing pattern for better nasal airflow and improved sleep quality.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                            <polyline points="3.27,6.96 12,12.01 20.73,6.96" />
+                            <line x1="12" y1="22.08" x2="12" y2="12" />
+                        </svg>
+                    </div>
+                    <h3>Sleep Issues</h3>
+                    <p>Address snoring, sleep apnea, and restless sleep through proper tongue positioning.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                            <line x1="9" y1="9" x2="9.01" y2="9" />
+                            <line x1="15" y1="9" x2="15.01" y2="9" />
+                        </svg>
+                    </div>
+                    <h3>TMJ & Tension</h3>
+                    <p>Relieve jaw pain and tension through targeted muscle exercises and posture correction.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </div>
+                    <h3>Kids' Oral Habits</h3>
+                    <p>Help children develop healthy breathing and swallowing patterns early in life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Assessment</h3>
+                    <p>We evaluate your breathing patterns, tongue posture, and oral function to create a personalized
+                        plan.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Training</h3>
+                    <p>Learn specific exercises and techniques to retrain your muscles for optimal function.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Maintain</h3>
+                    <p>Continue your progress with ongoing support and adjustments to ensure lasting results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Adults</h3>
+                    <ul>
+                        <li>Breathing pattern correction</li>
+                        <li>Sleep quality improvement</li>
+                        <li>TMJ pain relief</li>
+                        <li>Posture enhancement</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>Kids</h3>
+                    <ul>
+                        <li>Early intervention programs</li>
+                        <li>Thumb sucking cessation</li>
+                        <li>Proper swallowing development</li>
+                        <li>Speech improvement</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>Telehealth</h3>
+                    <ul>
+                        <li>Remote consultations</li>
+                        <li>Virtual exercise sessions</li>
+                        <li>Progress monitoring</li>
+                        <li>Flexible scheduling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12l2 2 4-4" />
+                        <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3" />
+                        <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3" />
+                    </svg>
+                    <span>Why Choose Us</span>
+                </div>
+                <h2>Why Choose Modern Myofunctional Therapy?</h2>
+                <p>We combine cutting-edge techniques with personalized care to deliver exceptional results that
+                    transform lives.</p>
+            </div>
+
+            <div class="modern-features-grid">
+                <div class="feature-showcase">
+                    <div class="feature-main">
+                        <div class="feature-visual">
+                            <div class="feature-icon-large">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <circle cx="12" cy="12" r="6" />
+                                    <circle cx="12" cy="12" r="2" />
+                                </svg>
+                            </div>
+                            <div class="feature-number">01</div>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Personalized Treatment Plans</h3>
+                            <p>Every treatment plan is meticulously crafted based on your unique needs, goals, and
+                                lifestyle. No one-size-fits-all approaches—just targeted solutions designed specifically
+                                for you.</p>
+                            <div class="feature-highlights">
+                                <span class="highlight-item">• Individual assessment</span>
+                                <span class="highlight-item">• Customized exercises</span>
+                                <span class="highlight-item">• Progress tracking</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-showcase">
+                    <div class="feature-main">
+                        <div class="feature-visual">
+                            <div class="feature-icon-large">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                            </div>
+                            <div class="feature-number">02</div>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Expert-Led Care</h3>
+                            <p>Board-certified therapists with advanced training in orofacial myology and breathing
+                                disorders. We bring years of experience and specialized knowledge to every session.</p>
+                            <div class="feature-highlights">
+                                <span class="highlight-item">• Board-certified therapists</span>
+                                <span class="highlight-item">• Advanced training</span>
+                                <span class="highlight-item">• Continuous education</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-showcase">
+                    <div class="feature-main">
+                        <div class="feature-visual">
+                            <div class="feature-icon-large">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2m-6 0h6m-6 0v7a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-7" />
+                                </svg>
+                            </div>
+                            <div class="feature-number">03</div>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Evidence-Based Methods</h3>
+                            <p>Our treatment approaches are backed by the latest scientific research and proven clinical
+                                outcomes. We stay current with emerging techniques and best practices.</p>
+                            <div class="feature-highlights">
+                                <span class="highlight-item">• Research-backed techniques</span>
+                                <span class="highlight-item">• Proven outcomes</span>
+                                <span class="highlight-item">• Latest innovations</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-showcase">
+                    <div class="feature-main">
+                        <div class="feature-visual">
+                            <div class="feature-icon-large">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg>
+                            </div>
+                            <div class="feature-number">04</div>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Comprehensive Support</h3>
+                            <p>From initial consultation to long-term maintenance, we provide continuous guidance and
+                                support throughout your entire journey to lasting success.</p>
+                            <div class="feature-highlights">
+                                <span class="highlight-item">• Ongoing guidance</span>
+                                <span class="highlight-item">• Long-term support</span>
+                                <span class="highlight-item">• Success maintenance</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-showcase">
+                    <div class="feature-main">
+                        <div class="feature-visual">
+                            <div class="feature-icon-large">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                                    <line x1="8" y1="21" x2="16" y2="21" />
+                                    <line x1="12" y1="17" x2="12" y2="21" />
+                                </svg>
+                            </div>
+                            <div class="feature-number">05</div>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Flexible Solutions</h3>
+                            <p>In-person sessions, telehealth consultations, and convenient scheduling options designed
+                                to fit seamlessly into your busy lifestyle.</p>
+                            <div class="feature-highlights">
+                                <span class="highlight-item">• In-person & virtual</span>
+                                <span class="highlight-item">• Flexible scheduling</span>
+                                <span class="highlight-item">• Lifestyle integration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-showcase">
+                    <div class="feature-main">
+                        <div class="feature-visual">
+                            <div class="feature-icon-large">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon
+                                        points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+                                </svg>
+                            </div>
+                            <div class="feature-number">06</div>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Proven Results</h3>
+                            <p>95% of our patients experience significant improvement in breathing, sleep quality, and
+                                overall well-being. Real results that last.</p>
+                            <div class="feature-highlights">
+                                <span class="highlight-item">• 95% success rate</span>
+                                <span class="highlight-item">• Lasting improvements</span>
+                                <span class="highlight-item">• Quality of life</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-metrics">
+                <div class="metric-item">
+                    <div class="metric-number">95%</div>
+                    <div class="metric-label">Success Rate</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-number">12+</div>
+                    <div class="metric-label">Years Experience</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-number">500+</div>
+                    <div class="metric-label">Patients Helped</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-number">24/7</div>
+                    <div class="metric-label">Support Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Patients Say</h2>
+            <div class="testimonials-container">
+                <div class="testimonial-slider">
+                    <div class="testimonial active">
+                        <p>"After just 3 months of therapy, my sleep quality improved dramatically. I wake up feeling
+                            refreshed and my snoring is completely gone."</p>
+                        <div class="testimonial-author">
+                            <strong>Sarah M.</strong>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <p>"My TMJ pain was unbearable before starting therapy. Now I can eat without pain and my jaw
+                            feels so much more relaxed. Highly recommend!"</p>
+                        <div class="testimonial-author">
+                            <strong>Michael R.</strong>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <p>"The telehealth sessions were perfect for my busy schedule. The exercises were easy to follow
+                            and I saw results within weeks. Amazing experience!"</p>
+                        <div class="testimonial-author">
+                            <strong>Jennifer L.</strong>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <p>"My daughter's thumb sucking stopped completely after 6 weeks of therapy. The techniques were
+                            gentle and effective. Thank you so much!"</p>
+                        <div class="testimonial-author">
+                            <strong>Lisa K.</strong>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <p>"I've been struggling with mouth breathing for years. This therapy changed everything - I
+                            breathe better, sleep better, and feel more energetic."</p>
+                        <div class="testimonial-author">
+                            <strong>David P.</strong>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                    <span class="dot" data-slide="3"></span>
+                    <span class="dot" data-slide="4"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Ready to Get Started?</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Transform Your Breathing Today</h3>
+                    <p>Take the first step towards better sleep, improved breathing, and enhanced quality of life. Our
+                        expert team is ready to help you on your journey.</p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                                </svg>
+                            </div>
+                            <div class="method-content">
+                                <strong>Call Us</strong>
+                                <span>(555) 123-4567</span>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                    <polyline points="22,6 12,13 2,6" />
+                                </svg>
+                            </div>
+                            <div class="method-content">
+                                <strong>Email Us</strong>
+                                <span>info@mmt.com</span>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                                </svg>
+                            </div>
+                            <div class="method-content">
+                                <strong>WhatsApp</strong>
+                                <span>+1 (555) 123-4567</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modern-contact-form">
+                    <div class="form-header">
+                        <div class="form-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13" />
+                                <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+                            </svg>
+                            <span>Get In Touch</span>
+                        </div>
+                        <h3>Ready to Transform Your Breathing?</h3>
+                        <p>Have questions about myofunctional therapy? We're here to help you take the first step
+                            towards better breathing, sleep, and overall well-being.</p>
+                    </div>
+
+                    <form class="clean-form" onsubmit="handleFormSubmit(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="contactName">Full Name *</label>
+                                <div class="input-container">
+                                    <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                        <circle cx="12" cy="7" r="4" />
+                                    </svg>
+                                    <input type="text" id="contactName" name="name" placeholder="Enter your full name"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contactEmail">Email Address *</label>
+                                <div class="input-container">
+                                    <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                        <polyline points="22,6 12,13 2,6" />
+                                    </svg>
+                                    <input type="email" id="contactEmail" name="email" placeholder="Enter your email"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contactPhone">Phone Number</label>
+                                <div class="input-container">
+                                    <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path
+                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                                    </svg>
+                                    <input type="tel" id="contactPhone" name="phone"
+                                        placeholder="Enter your phone number">
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="contactConcerns">Primary Concerns</label>
+                                <div class="select-container">
+                                    <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M9 12l2 2 4-4" />
+                                        <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3" />
+                                        <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3" />
+                                    </svg>
+                                    <select id="contactConcerns" name="concerns">
+                                        <option value="">Select your main concern</option>
+                                        <option value="mouth-breathing">Mouth Breathing</option>
+                                        <option value="sleep-apnea">Sleep Apnea</option>
+                                        <option value="snoring">Snoring</option>
+                                        <option value="tmj">TMJ/Jaw Pain</option>
+                                        <option value="speech">Speech Issues</option>
+                                        <option value="orthodontic">Orthodontic Support</option>
+                                        <option value="sleep-quality">Sleep Quality</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="contactMessage">Tell Us More</label>
+                                <div class="textarea-container">
+                                    <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                        <polyline points="14,2 14,8 20,8" />
+                                        <line x1="16" y1="13" x2="8" y2="13" />
+                                        <line x1="16" y1="17" x2="8" y2="17" />
+                                        <polyline points="10,9 9,9 8,9" />
+                                    </svg>
+                                    <textarea id="contactMessage" name="message"
+                                        placeholder="Describe your concerns, goals, or any questions you have..."
+                                        rows="4"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-footer">
+                            <button type="submit" class="modern-submit-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 2L11 13" />
+                                    <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+                                </svg>
+                                <span>Send Message</span>
+                            </button>
+                            <p class="form-note">We'll respond within 24 hours to discuss your needs and schedule a free
+                                consultation.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Modern Myofunctional Therapy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Consultation Modal -->
+    <div id="consultationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Get Started Today</h2>
+                <p>Schedule your free consultation and take the first step towards better breathing</p>
+                <button onclick="closeModal()"
+                    style="position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; padding: 10px; cursor: pointer;">X</button>
+            </div>
+            <form class="modal-form" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                        <input type="text" name="name" placeholder="Your Full Name" required>
+                        <div class="input-focus-line"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg>
+                        <input type="email" name="email" placeholder="Your Email Address" required>
+                        <div class="input-focus-line"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                        <input type="tel" name="phone" placeholder="Your Phone Number" required>
+                        <div class="input-focus-line"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="textarea-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14,2 14,8 20,8" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                            <line x1="16" y1="17" x2="8" y2="17" />
+                            <polyline points="10,9 9,9 8,9" />
+                        </svg>
+                        <textarea name="message" placeholder="Tell us about your breathing or sleep concerns..."
+                            rows="4" required></textarea>
+                        <div class="input-focus-line"></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary modal-submit">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8 2v4" />
+                        <path d="M16 2v4" />
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <path d="M3 10h18" />
+                    </svg>
+                    <span>Schedule Now</span>
+                    <div class="btn-shine"></div>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Self-Check Assessment Modal -->
+    <div id="selfCheckModal" class="modal">
+        <div class="modal-content self-check-content">
+            <div class="modal-header">
+                <h2>60-Second Self-Check</h2>
+                <p>Quick assessment to see if myofunctional therapy might help you or your child</p>
+                <button onclick="closeSelfCheckModal()" class="modal-close">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="self-check-form">
+                <div class="question-group">
+                    <h3>1. Breathing Patterns</h3>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="mouth-breathing" value="1">
+                            <span class="checkmark"></span>
+                            Mouth breathing during the day
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="snoring" value="1">
+                            <span class="checkmark"></span>
+                            Snoring or restless sleep
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="dry-mouth" value="1">
+                            <span class="checkmark"></span>
+                            Frequent dry mouth upon waking
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <h3>2. Sleep Quality</h3>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="fatigue" value="1">
+                            <span class="checkmark"></span>
+                            Daytime fatigue despite adequate sleep
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="teeth-grinding" value="1">
+                            <span class="checkmark"></span>
+                            Teeth grinding or clenching
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="headaches" value="1">
+                            <span class="checkmark"></span>
+                            Morning headaches or jaw tension
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <h3>3. Oral Posture</h3>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="open-mouth" value="1">
+                            <span class="checkmark"></span>
+                            Open mouth posture at rest
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="tongue-position" value="1">
+                            <span class="checkmark"></span>
+                            Tongue rests low in mouth
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="lip-seal" value="1">
+                            <span class="checkmark"></span>
+                            Difficulty keeping lips sealed
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <h3>4. Orthodontic History</h3>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="orthodontic-treatment" value="1">
+                            <span class="checkmark"></span>
+                            Current or past orthodontic treatment
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="relapse" value="1">
+                            <span class="checkmark"></span>
+                            Teeth shifting back after braces
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="tongue-tie" value="1">
+                            <span class="checkmark"></span>
+                            Tongue-tie or restricted tongue movement
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <h3>5. Speech & Swallowing</h3>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="speech-clarity" value="1">
+                            <span class="checkmark"></span>
+                            Speech clarity concerns
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="swallowing" value="1">
+                            <span class="checkmark"></span>
+                            Difficulty swallowing or frequent choking
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="thumb-sucking" value="1">
+                            <span class="checkmark"></span>
+                            Thumb sucking or pacifier use (children)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="results-section" id="resultsSection" style="display: none;">
+                    <div class="results-content">
+                        <h3>Your Assessment Results</h3>
+                        <div class="score-display">
+                            <div class="score-circle">
+                                <span id="scoreNumber">0</span>
+                                <span class="score-label">points</span>
+                            </div>
+                        </div>
+                        <div class="recommendation" id="recommendation">
+                            <!-- Results will be populated by JavaScript -->
+                        </div>
+                        <div class="next-steps">
+                            <button class="btn-primary" onclick="openModal()">Book a Free Consultation</button>
+                            <button class="btn-secondary" onclick="closeSelfCheckModal()">Close Assessment</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="assessment-actions">
+                    <button class="btn-primary" onclick="calculateScore()">Get My Results</button>
+                    <button class="btn-secondary" onclick="closeSelfCheckModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Consultation Modal -->
+    <div id="consultationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Book Your Free Consultation</h2>
+                <p>Get started with a personalized myofunctional therapy plan</p>
+                <button onclick="closeModal()" class="modal-close">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form class="modal-form" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="modalName">Full Name *</label>
+                    <input type="text" id="modalName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="modalEmail">Email Address *</label>
+                    <input type="email" id="modalEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="modalPhone">Phone Number</label>
+                    <input type="tel" id="modalPhone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="modalAge">Age Range</label>
+                    <select id="modalAge" name="age">
+                        <option value="">Select age range</option>
+                        <option value="child">Child (4-12)</option>
+                        <option value="teen">Teen (13-17)</option>
+                        <option value="adult">Adult (18+)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="modalConcerns">Main Concerns</label>
+                    <textarea id="modalConcerns" name="concerns" rows="4"
+                        placeholder="Tell us about your breathing, sleep, or oral function concerns..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary modal-submit">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8 2v4" />
+                        <path d="M16 2v4" />
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <path d="M3 10h18" />
+                    </svg>
+                    Schedule Consultation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

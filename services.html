@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Modern Myofunctional Therapy</title>
+    <meta name="description"
+        content="Comprehensive myofunctional therapy services for adults and children. Improve breathing, sleep, and oral function with our expert treatment programs.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Breathing wave -->
+                            <path d="M10 30 Q20 20 30 30 T50 30" stroke="currentColor" stroke-width="2" fill="none"
+                                opacity="0.8" />
+                            <path d="M10 35 Q20 25 30 35 T50 35" stroke="currentColor" stroke-width="1.5" fill="none"
+                                opacity="0.6" />
+                            <path d="M10 40 Q20 30 30 40 T50 40" stroke="currentColor" stroke-width="1" fill="none"
+                                opacity="0.4" />
+
+                            <!-- M letter with medical cross -->
+                            <path
+                                d="M15 15 L15 45 L20 45 L20 25 L25 35 L30 25 L30 45 L35 45 L35 15 L30 15 L25 25 L20 15 Z"
+                                fill="currentColor" />
+
+                            <!-- Small cross on top -->
+                            <path d="M25 8 L25 12 M23 10 L27 10" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+
+                            <!-- Airflow dots -->
+                            <circle cx="45" cy="20" r="2" fill="currentColor" opacity="0.6" />
+                            <circle cx="48" cy="25" r="1.5" fill="currentColor" opacity="0.4" />
+                            <circle cx="46" cy="30" r="1" fill="currentColor" opacity="0.3" />
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-main">Modern</span>
+                        <span class="logo-sub">Myofunctional Therapy</span>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link active">Services</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <button class="btn-primary nav-cta" onclick="openModal()">Book Free Consultation</button>
+            </div>
+            <div class="mobile-menu-toggle" id="mobileToggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Services Hero -->
+    <section class="services-hero">
+        <div class="container">
+            <div class="services-hero-content">
+                <h1>Our Services</h1>
+                <p>Comprehensive myofunctional therapy programs designed to improve breathing, sleep, and oral function
+                    for patients of all ages.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="services-section">
+        <div class="container">
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </div>
+                    <h3>Adult Therapy</h3>
+                    <p>Comprehensive treatment for adults dealing with sleep apnea, snoring, TMJ disorders, and
+                        breathing issues.</p>
+                    <ul>
+                        <li>Sleep-disordered breathing treatment</li>
+                        <li>TMJ and jaw pain relief</li>
+                        <li>Snoring reduction</li>
+                        <li>Posture correction</li>
+                        <li>Stress management techniques</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                        </svg>
+                    </div>
+                    <h3>Pediatric Therapy</h3>
+                    <p>Specialized treatment for children to address developmental issues, breathing problems, and oral
+                        habits.</p>
+                    <ul>
+                        <li>Thumb sucking cessation</li>
+                        <li>Mouth breathing correction</li>
+                        <li>Speech development support</li>
+                        <li>Facial growth guidance</li>
+                        <li>School performance improvement</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                    </div>
+                    <h3>Telehealth Consultations</h3>
+                    <p>Convenient remote consultations and follow-up sessions for patients who prefer virtual care.</p>
+                    <ul>
+                        <li>Initial assessments</li>
+                        <li>Progress monitoring</li>
+                        <li>Exercise demonstrations</li>
+                        <li>Parent education</li>
+                        <li>Flexible scheduling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <h2>Our Treatment Process</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Initial Assessment</h3>
+                    <p>Comprehensive evaluation of breathing patterns, oral function, and sleep quality to identify
+                        specific issues.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Customized Plan</h3>
+                    <p>Development of a personalized treatment plan tailored to your specific needs and goals.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Active Treatment</h3>
+                    <p>Regular therapy sessions with exercises and techniques to improve breathing and oral function.
+                    </p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Maintenance</h3>
+                    <p>Ongoing support and monitoring to ensure long-term success and prevent regression.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Modern Myofunctional Therapy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

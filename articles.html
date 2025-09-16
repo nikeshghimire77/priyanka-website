@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles - Modern Myofunctional Therapy</title>
+    <meta name="description"
+        content="Read our latest articles about myofunctional therapy, breathing exercises, and sleep improvement techniques.">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Breathing wave -->
+                            <path d="M10 30 Q20 20 30 30 T50 30" stroke="currentColor" stroke-width="2" fill="none"
+                                opacity="0.8" />
+                            <path d="M10 35 Q20 25 30 35 T50 35" stroke="currentColor" stroke-width="1.5" fill="none"
+                                opacity="0.6" />
+                            <path d="M10 40 Q20 30 30 40 T50 40" stroke="currentColor" stroke-width="1" fill="none"
+                                opacity="0.4" />
+                            <!-- M letter with medical cross -->
+                            <path
+                                d="M15 15 L15 45 L20 45 L20 25 L25 35 L30 25 L30 45 L35 45 L35 15 L30 15 L25 25 L20 15 Z"
+                                fill="currentColor" />
+                            <!-- Small cross on top -->
+                            <path d="M25 8 L25 12 M23 10 L27 10" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                            <!-- Airflow dots -->
+                            <circle cx="45" cy="20" r="2" fill="currentColor" opacity="0.6" />
+                            <circle cx="48" cy="25" r="1.5" fill="currentColor" opacity="0.4" />
+                            <circle cx="46" cy="30" r="1" fill="currentColor" opacity="0.3" />
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-main">Modern</span>
+                        <span class="logo-sub">Myofunctional Therapy</span>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="articles.html" class="nav-link active">Articles</a>
+                <button class="btn-primary nav-cta" onclick="openModal()">Book Free Consultation</button>
+            </div>
+            <div class="mobile-menu-toggle" id="mobileToggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Articles Hero -->
+    <section class="articles-hero">
+        <div class="container">
+            <div class="articles-hero-content">
+                <h1>Articles & Resources</h1>
+                <p>Learn more about myofunctional therapy, breathing techniques, and sleep improvement through our
+                    expert articles.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search and Filter -->
+    <section class="articles-search">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="M21 21l-4.35-4.35" />
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Search articles...">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="breathing">Breathing</button>
+                    <button class="filter-btn" data-category="sleep">Sleep</button>
+                    <button class="filter-btn" data-category="exercises">Exercises</button>
+                    <button class="filter-btn" data-category="children">Children</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="articles-content">
+        <div class="container">
+            <div class="articles-grid" id="articlesGrid">
+                <!-- Articles will be loaded here -->
+                <div class="article-card" data-category="breathing">
+                    <div class="article-image">
+                        <img src="assets/img/Nasal Breathing and Tongue Posture.png" alt="Nasal Breathing">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">Breathing</span>
+                            <span class="article-date">Dec 15, 2024</span>
+                        </div>
+                        <h3>The Importance of Nasal Breathing</h3>
+                        <p>Learn why nasal breathing is crucial for your health and how myofunctional therapy can help
+                            you develop proper breathing patterns.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+
+                <div class="article-card" data-category="sleep">
+                    <div class="article-image">
+                        <img src="assets/img/Airflow and Tongue Alignment.png" alt="Sleep Quality">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">Sleep</span>
+                            <span class="article-date">Dec 10, 2024</span>
+                        </div>
+                        <h3>How Tongue Posture Affects Sleep Quality</h3>
+                        <p>Discover the connection between tongue position and sleep quality, and how proper alignment
+                            can improve your rest.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+
+                <div class="article-card" data-category="exercises">
+                    <div class="article-image">
+                        <img src="assets/img/Tongue Posture Diagram.png" alt="Exercises">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">Exercises</span>
+                            <span class="article-date">Dec 5, 2024</span>
+                        </div>
+                        <h3>Simple Myofunctional Exercises You Can Do at Home</h3>
+                        <p>Start improving your oral function with these easy exercises that can be done in the comfort
+                            of your own home.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+
+                <div class="article-card" data-category="children">
+                    <div class="article-image">
+                        <img src="assets/img/ChatGPT Image Sep 14, 2025, 03_58_06 PM.png" alt="Children's Therapy">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">Children</span>
+                            <span class="article-date">Nov 28, 2024</span>
+                        </div>
+                        <h3>Early Intervention for Children's Oral Development</h3>
+                        <p>Why early intervention is crucial for children's oral development and how it can prevent
+                            future problems.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+
+                <div class="article-card" data-category="breathing">
+                    <div class="article-image">
+                        <img src="assets/img/ChatGPT Image Sep 14, 2025, 04_04_06 PM.png" alt="Breathing Techniques">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">Breathing</span>
+                            <span class="article-date">Nov 20, 2024</span>
+                        </div>
+                        <h3>Breathing Techniques for Stress Relief</h3>
+                        <p>Learn how proper breathing techniques can help reduce stress and improve your overall
+                            well-being.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+
+                <div class="article-card" data-category="sleep">
+                    <div class="article-image">
+                        <img src="assets/img/Nasal Breathing and Tongue Posture.png" alt="Sleep Apnea">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">Sleep</span>
+                            <span class="article-date">Nov 15, 2024</span>
+                        </div>
+                        <h3>Understanding Sleep Apnea and Myofunctional Therapy</h3>
+                        <p>How myofunctional therapy can be an effective treatment for sleep apnea and related breathing
+                            disorders.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Modern Myofunctional Therapy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Article search and filter functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const articles = document.querySelectorAll('.article-card');
+
+            // Search functionality
+            searchInput.addEventListener('input', function () {
+                const searchTerm = this.value.toLowerCase();
+                articles.forEach(article => {
+                    const title = article.querySelector('h3').textContent.toLowerCase();
+                    const content = article.querySelector('p').textContent.toLowerCase();
+                    const category = article.getAttribute('data-category');
+
+                    const matchesSearch = title.includes(searchTerm) || content.includes(searchTerm);
+                    const matchesCategory = article.style.display !== 'none';
+
+                    if (matchesSearch && matchesCategory) {
+                        article.style.display = 'block';
+                    } else {
+                        article.style.display = 'none';
+                    }
+                });
+            });
+
+            // Filter functionality
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+
+                    const category = this.getAttribute('data-category');
+
+                    articles.forEach(article => {
+                        if (category === 'all' || article.getAttribute('data-category') === category) {
+                            article.style.display = 'block';
+                        } else {
+                            article.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
