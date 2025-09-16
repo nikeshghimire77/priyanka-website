@@ -98,6 +98,26 @@
                 block: 'center'
             });
         }
+
+        // Mobile menu function - ensure it's always available
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileToggle = document.getElementById('mobileToggle');
+
+            if (navLinks && mobileToggle) {
+                navLinks.classList.toggle('active');
+                mobileToggle.classList.toggle('active');
+
+                if (navLinks.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            }
+        }
+
+        // Make function globally available
+        window.toggleMobileMenu = toggleMobileMenu;
     </script>
 </head>
 
@@ -197,7 +217,23 @@
                     <span>Book Free Consultation</span>
                 </button>
             </div>
-            <div class="mobile-menu-toggle" id="mobileToggle" onclick="toggleMobileMenu()">
+            <div class="mobile-menu-toggle" id="mobileToggle" onclick="
+                (function() {
+                    const navLinks = document.querySelector('.nav-links');
+                    const mobileToggle = document.getElementById('mobileToggle');
+                    
+                    if (navLinks && mobileToggle) {
+                        navLinks.classList.toggle('active');
+                        mobileToggle.classList.toggle('active');
+                        
+                        if (navLinks.classList.contains('active')) {
+                            document.body.style.overflow = 'hidden';
+                        } else {
+                            document.body.style.overflow = '';
+                        }
+                    }
+                })();
+            ">
                 <span></span>
                 <span></span>
                 <span></span>

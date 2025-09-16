@@ -1,5 +1,34 @@
 // Simple JavaScript for the website
 
+// Make mobile menu functions globally available immediately
+window.toggleMobileMenu = function () {
+    const navLinks = document.querySelector('.nav-links');
+    const mobileToggle = document.getElementById('mobileToggle');
+
+    if (navLinks && mobileToggle) {
+        navLinks.classList.toggle('active');
+        mobileToggle.classList.toggle('active');
+
+        // Prevent body scroll when menu is open
+        if (navLinks.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }
+};
+
+window.closeMobileMenu = function () {
+    const navLinks = document.querySelector('.nav-links');
+    const mobileToggle = document.getElementById('mobileToggle');
+
+    if (navLinks && mobileToggle) {
+        navLinks.classList.remove('active');
+        mobileToggle.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+};
+
 // Make functions globally available
 window.openModal = function () {
     const modal = document.getElementById('consultationModal');
@@ -230,6 +259,9 @@ function toggleMobileMenu() {
     }
 }
 
+// Make function globally available
+window.toggleMobileMenu = toggleMobileMenu;
+
 // Close mobile menu when clicking on a link
 function closeMobileMenu() {
     const navLinks = document.querySelector('.nav-links');
@@ -241,6 +273,9 @@ function closeMobileMenu() {
         document.body.style.overflow = '';
     }
 }
+
+// Make function globally available
+window.closeMobileMenu = closeMobileMenu;
 
 // Close mobile menu when clicking outside
 function closeMobileMenuOnOutsideClick(event) {
