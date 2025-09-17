@@ -219,23 +219,7 @@
                     <span>Book Free Consultation</span>
                 </button>
             </div>
-            <div class="mobile-menu-toggle" id="mobileToggle" onclick="
-                (function() {
-                    const navLinks = document.querySelector('.nav-links');
-                    const mobileToggle = document.getElementById('mobileToggle');
-                    
-                    if (navLinks && mobileToggle) {
-                        navLinks.classList.toggle('active');
-                        mobileToggle.classList.toggle('active');
-                        
-                        if (navLinks.classList.contains('active')) {
-                            document.body.style.overflow = 'hidden';
-                        } else {
-                            document.body.style.overflow = '';
-                        }
-                    }
-                })();
-            ">
+            <div class="mobile-menu-toggle" id="mobileToggle" onclick="toggleMobileMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -247,7 +231,12 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">Modern Myofunctional Therapy for Better Breathing, Sleep, and Smile</h1>
+                <div class="omd-definition">
+                    <h3>Orofacial Myofunctional Disorders (OMDs)</h3>
+                    <p>OMDs are abnormal movement patterns of the face and mouth that affect breathing, swallowing,
+                        speech, and facial development.</p>
+                </div>
+                <h1 class="hero-title">Myofunctional Therapy for Better Breathing, Sleep, and Smile</h1>
                 <p class="hero-subtitle">We help children, teens, and adults retrain the tongue, lips, and breathing
                     patterns with gentle exercises and daily habits—so you feel rested, speak clearly, and support
                     long-term oral health.</p>
@@ -754,7 +743,7 @@
                     </svg>
                     <span>Why Choose Us</span>
                 </div>
-                <h2>Why Choose Modern Myofunctional Therapy?</h2>
+                <h2>Why Choose Myofunctional Therapy?</h2>
                 <p>We combine cutting-edge techniques with personalized care to deliver exceptional results that
                     transform lives.</p>
             </div>
