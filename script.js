@@ -1,5 +1,7 @@
 // Simple JavaScript for the website
 
+// No client email library needed when using FormSubmit (native POST)
+
 // Make mobile menu functions globally available immediately
 window.toggleMobileMenu = function () {
     const navLinks = document.querySelector('.nav-links');
@@ -12,8 +14,17 @@ window.toggleMobileMenu = function () {
         // Prevent body scroll when menu is open
         if (navLinks.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
+            // Fallback show if CSS is not applied
+            const display = window.getComputedStyle(navLinks).display;
+            if (display === 'none') {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+            }
+            mobileToggle.setAttribute('aria-expanded', 'true');
         } else {
             document.body.style.overflow = '';
+            navLinks.style.display = '';
+            mobileToggle.setAttribute('aria-expanded', 'false');
         }
     }
 };
@@ -40,6 +51,96 @@ window.openModal = function () {
         document.body.style.overflow = 'hidden';
     }
 };
+
+// Lightweight toast notifications
+function showToast(message, variant = 'success') {
+    let container = document.getElementById('globalToastContainer');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'globalToastContainer';
+        container.style.position = 'fixed';
+        container.style.left = '50%';
+        container.style.bottom = '24px';
+        container.style.transform = 'translateX(-50%)';
+        container.style.display = 'flex';
+        container.style.flexDirection = 'column';
+        container.style.gap = '10px';
+        container.style.zIndex = '9999';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.style.minWidth = '280px';
+    toast.style.maxWidth = '90vw';
+    toast.style.padding = '14px 16px';
+    toast.style.borderRadius = '10px';
+    toast.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)';
+    toast.style.fontSize = '14px';
+    toast.style.lineHeight = '1.4';
+    toast.style.display = 'flex';
+    toast.style.alignItems = 'center';
+    toast.style.gap = '10px';
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(10px)';
+    toast.style.transition = 'all 300ms ease';
+
+    if (variant === 'success') {
+        toast.style.background = '#e8f7ee';
+        toast.style.color = '#155724';
+        toast.style.border = '1px solid #b7e4c7';
+        toast.textContent = message;
+    } else if (variant === 'error') {
+        toast.style.background = '#fdecea';
+        toast.style.color = '#611a15';
+        toast.style.border = '1px solid #f5c2c0';
+        toast.textContent = message;
+    } else {
+        toast.style.background = '#eef2ff';
+        toast.style.color = '#1e3a8a';
+        toast.style.border = '1px solid #c7d2fe';
+        toast.textContent = message;
+    }
+
+    // Close button
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.textContent = '×';
+    closeBtn.setAttribute('aria-label', 'Close');
+    closeBtn.style.marginLeft = '8px';
+    closeBtn.style.border = 'none';
+    closeBtn.style.background = 'transparent';
+    closeBtn.style.cursor = 'pointer';
+    closeBtn.style.fontSize = '18px';
+    closeBtn.style.lineHeight = '1';
+    closeBtn.style.color = 'inherit';
+    closeBtn.addEventListener('click', () => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        setTimeout(() => toast.remove(), 250);
+    });
+
+    const textSpan = document.createElement('span');
+    textSpan.textContent = message;
+    textSpan.style.flex = '1';
+
+    toast.textContent = '';
+    toast.appendChild(textSpan);
+    toast.appendChild(closeBtn);
+
+    container.appendChild(toast);
+    requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+    });
+
+    // Auto-dismiss after 5s
+    setTimeout(() => {
+        if (!toast.isConnected) return;
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        setTimeout(() => toast.remove(), 250);
+    }, 5000);
+}
 
 window.closeModal = function () {
     const modal = document.getElementById('consultationModal');
@@ -74,12 +175,8 @@ window.closeSelfCheckModal = function () {
     }
 };
 
-window.handleFormSubmit = function (event) {
-    event.preventDefault();
-    alert('Thank you! We will contact you soon to schedule your consultation.');
-    window.closeModal();
-    event.target.reset();
-};
+// Remove JS interception for form submit; native POST will handle it
+delete window.handleFormSubmit;
 
 // Test function to verify JavaScript is working
 function testFunction() {
@@ -208,37 +305,67 @@ function closeModalOnOutsideClick(event) {
 }
 
 // Form submission handling
-function handleFormSubmit(event) {
+async function handleFormSubmit(event) {
     event.preventDefault();
 
-    // Get form data
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
+    const form = event.target;
+    const formData = new FormData(form);
 
-    // Simple validation
-    const requiredFields = ['name', 'email', 'phone', 'message'];
-    const missingFields = requiredFields.filter(field => !data[field] || data[field].trim() === '');
-
-    if (missingFields.length > 0) {
-        alert('Please fill in all required fields.');
-        return;
+    // Basic front-end validation for email if present
+    const email = formData.get('email') || formData.get('from_email');
+    if (email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
     }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(data.email)) {
-        alert('Please enter a valid email address.');
-        return;
+    // Get form data for EmailJS
+    const templateParams = {
+        from_name: formData.get('name') || formData.get('from_name') || 'Unknown',
+        from_email: email || 'No email provided',
+        phone: formData.get('phone') || 'Not provided',
+        message: formData.get('message') || formData.get('concerns') || 'No message provided',
+        concerns: formData.get('concerns') || formData.get('primary_concern') || 'Not specified',
+        to_email: 'nikeshghimire77@gmail.com'
+    };
+
+    // Show loading state
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn ? submitBtn.textContent : '';
+    if (submitBtn) {
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
     }
 
-    // Show success message
-    alert('Thank you! Your consultation request has been submitted. We will contact you soon.');
+    try {
+        // Send email using EmailJS
+        const response = await emailjs.send(
+            'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+            'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+            templateParams
+        );
 
-    // Reset form
-    event.target.reset();
-
-    // Close modal
-    closeModal();
+        if (response.status === 200) {
+            alert('Thank you! Your message has been sent. We will contact you within 24 hours.');
+            form.reset();
+            if (typeof closeModal === 'function') {
+                closeModal();
+            }
+        } else {
+            throw new Error('Email service error');
+        }
+    } catch (error) {
+        console.error('EmailJS Error:', error);
+        alert('Sorry, there was a problem sending your message. Please try again or contact us directly at nikeshghimire77@gmail.com');
+    } finally {
+        // Reset button state
+        if (submitBtn) {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
+    }
 }
 
 // Mobile menu functionality
@@ -253,8 +380,16 @@ function toggleMobileMenu() {
         // Prevent body scroll when menu is open
         if (navLinks.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
+            const display = window.getComputedStyle(navLinks).display;
+            if (display === 'none') {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+            }
+            mobileToggle.setAttribute('aria-expanded', 'true');
         } else {
             document.body.style.overflow = '';
+            navLinks.style.display = '';
+            mobileToggle.setAttribute('aria-expanded', 'false');
         }
     }
 }
@@ -271,6 +406,8 @@ function closeMobileMenu() {
         navLinks.classList.remove('active');
         mobileToggle.classList.remove('active');
         document.body.style.overflow = '';
+        navLinks.style.display = '';
+        mobileToggle.setAttribute('aria-expanded', 'false');
     }
 }
 
@@ -299,9 +436,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const mobileToggle = document.getElementById('mobileToggle');
     const navLinks = document.querySelectorAll('.nav-link');
 
-    if (mobileToggle) {
-        mobileToggle.addEventListener('click', toggleMobileMenu);
-    }
+    // Avoid double-binding; mobile toggle uses inline onclick in HTML
 
     // Close mobile menu when clicking on nav links
     navLinks.forEach(link => {
@@ -332,17 +467,73 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Form initialization
-    const consultationForm = document.querySelector('.modal-form');
-    if (consultationForm) {
-        consultationForm.addEventListener('submit', handleFormSubmit);
+    // Convert Formspree forms to AJAX to avoid redirect
+    function enableFormspreeAjax() {
+        const forms = Array.from(document.querySelectorAll('form'))
+            .filter(f => (f.getAttribute('action') || '').includes('formspree.io'));
+
+        forms.forEach(form => {
+            // Avoid duplicate binding
+            if (form.__formspreeBound) return;
+            form.__formspreeBound = true;
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const action = form.getAttribute('action');
+                const formData = new FormData(form);
+
+                // Button loading state
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn ? submitBtn.textContent : '';
+                if (submitBtn) {
+                    submitBtn.textContent = 'Sending...';
+                    submitBtn.disabled = true;
+                }
+
+                // Ensure we receive JSON and not a redirect page
+                try {
+                    const resp = await fetch(action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    // Message container
+                    let msg = form.querySelector('.form-feedback');
+                    if (!msg) {
+                        msg = document.createElement('div');
+                        msg.className = 'form-feedback';
+                        msg.style.marginTop = '12px';
+                        msg.style.padding = '12px 14px';
+                        msg.style.borderRadius = '8px';
+                        msg.style.fontSize = '14px';
+                        form.appendChild(msg);
+                    }
+
+                    if (resp.ok) {
+                        showToast('Thank you! Your message has been sent. We will contact you within 24 hours.', 'success');
+                        form.reset();
+                        // Close modal if applicable
+                        if (typeof closeModal === 'function' && form.classList.contains('modal-form')) {
+                            closeModal();
+                        }
+                    } else {
+                        showToast('Sorry, there was a problem sending your message. Please try again.', 'error');
+                    }
+                } catch (err) {
+                    showToast('Network error. Please check your connection and try again.', 'error');
+                } finally {
+                    if (submitBtn) {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }
+                }
+            });
+        });
     }
 
-    // Contact form initialization
-    const contactForm = document.querySelector('.contact-form form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', handleFormSubmit);
-    }
+    enableFormspreeAjax();
 
     // Add click handlers to all "Book Free Consultation" buttons
     const consultationButtons = document.querySelectorAll('[onclick="openModal()"]');
@@ -385,14 +576,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Form submission
-document.querySelectorAll('form').forEach(form => {
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        alert('Thank you! We will contact you soon to schedule your consultation.');
-        closeModal();
-        form.reset();
-    });
-});
+// Removed generic alert-only submit handler; handled by handleFormSubmit
 
 // Animated counter for statistics
 function animateCounter(element, target) {
@@ -523,7 +707,7 @@ function testSlider() {
 window.testSlider = testSlider;
 
 // Testimonial slider functionality
-let currentSlide = 0;
+// Reuse currentSlide from above; only declare the interval here
 let testimonialInterval;
 
 function initTestimonialSlider() {

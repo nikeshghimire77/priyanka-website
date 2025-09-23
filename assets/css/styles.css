@@ -3368,6 +3368,12 @@ section {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
+    /* Allow mobile nav dropdown to render outside header */
+    .header {
+        overflow: visible;
+    }
+
     .nav-links {
         display: none;
     }

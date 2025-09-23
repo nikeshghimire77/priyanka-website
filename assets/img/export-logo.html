@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Export Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .logo-size {
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: white;
+        }
+
+        .logo-size h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+        }
+
+        canvas {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #4338ca;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎨 The Myo Nest Logo - PNG Export Tool</h1>
+
+        <div class="instructions">
+            <h3>📋 Instructions:</h3>
+            <ol>
+                <li>Right-click on each logo below</li>
+                <li>Select "Save image as..." or "Download image"</li>
+                <li>Choose your desired filename and location</li>
+                <li>Use the logo anywhere you need it!</li>
+            </ol>
+        </div>
+
+        <div class="logo-container">
+            <!-- Small Logo 100x100 -->
+            <div class="logo-size">
+                <h3>Small (100×100px)</h3>
+                <img id="logo100" src="nest-logo.svg" width="100" height="100" alt="The Myo Nest Logo Small">
+                <br>
+                <button onclick="downloadLogo('logo100', 'nest-logo-100x100.png')">Download PNG</button>
+            </div>
+
+            <!-- Medium Logo 200x200 -->
+            <div class="logo-size">
+                <h3>Medium (200×200px)</h3>
+                <img id="logo200" src="nest-logo.svg" width="200" height="200" alt="The Myo Nest Logo Medium">
+                <br>
+                <button onclick="downloadLogo('logo200', 'nest-logo-200x200.png')">Download PNG</button>
+            </div>
+
+            <!-- Large Logo 400x400 -->
+            <div class="logo-size">
+                <h3>Large (400×400px)</h3>
+                <img id="logo400" src="nest-logo.svg" width="400" height="400" alt="The Myo Nest Logo Large">
+                <br>
+                <button onclick="downloadLogo('logo400', 'nest-logo-400x400.png')">Download PNG</button>
+            </div>
+
+            <!-- Extra Large Logo 600x600 -->
+            <div class="logo-size">
+                <h3>Extra Large (600×600px)</h3>
+                <img id="logo600" src="nest-logo.svg" width="600" height="600" alt="The Myo Nest Logo Extra Large">
+                <br>
+                <button onclick="downloadLogo('logo600', 'nest-logo-600x600.png')">Download PNG</button>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>🎯 Logo Meaning & Symbolism:</h3>
+            <p><strong>The Myo Nest logo represents:</strong></p>
+            <ul>
+                <li><strong>🏠 Nest = Safe Space</strong> - A place of comfort, healing, and growth</li>
+                <li><strong>🐦 Bird = Freedom & Breathing</strong> - Represents improved breathing and freedom from
+                    breathing problems</li>
+                <li><strong>🥚 Eggs = Potential & Growth</strong> - New beginnings and the potential for transformation
+                </li>
+                <li><strong>🌿 Branches = Support & Foundation</strong> - The strong foundation myofunctional therapy
+                    provides</li>
+                <li><strong>✨ Feathers = Gentle Care</strong> - The soft, non-invasive approach of your therapy</li>
+            </ul>
+            <p><em>The logo symbolizes your practice as a "safe nest" where patients can heal, grow, and transform their
+                    breathing and oral health.</em></p>
+        </div>
+    </div>
+
+    <script>
+        function downloadLogo(imgId, filename) {
+            const img = document.getElementById(imgId);
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            img.onload = function () {
+                ctx.drawImage(img, 0, 0);
+                const link = document.createElement('a');
+                link.download = filename;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            };
+
+            img.onload();
+        }
+    </script>
+</body>
+
+</html>

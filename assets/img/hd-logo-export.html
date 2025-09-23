@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HD Logo Export - The Myo Nest</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .logo-size {
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: white;
+        }
+
+        .logo-size h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+        }
+
+        button {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #4338ca;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .hd-badge {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        /* HD CSS Nest Logo Styles */
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(139, 92, 246, 0.05));
+            border-radius: 50%;
+            border: 2px solid rgba(79, 70, 229, 0.1);
+            box-shadow: 0 4px 16px rgba(79, 70, 229, 0.1);
+        }
+
+        .nest-logo {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            animation: nestFloat 4s ease-in-out infinite;
+        }
+
+        .nest-base {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 25px;
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .nest-branch {
+            position: absolute;
+            background: linear-gradient(45deg, #654321, #8B4513);
+            border-radius: 2px;
+        }
+
+        .nest-branch-1 {
+            top: 15px;
+            left: 5px;
+            width: 20px;
+            height: 3px;
+            transform: rotate(-15deg);
+        }
+
+        .nest-branch-2 {
+            top: 18px;
+            right: 5px;
+            width: 18px;
+            height: 3px;
+            transform: rotate(15deg);
+        }
+
+        .nest-branch-3 {
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 3px;
+            transform: translateX(-50%) rotate(-5deg);
+        }
+
+        .nest-feather {
+            position: absolute;
+            background: linear-gradient(45deg, #DEB887, #F5DEB3);
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+
+        .nest-feather-1 {
+            top: 8px;
+            left: 8px;
+            width: 8px;
+            height: 4px;
+            transform: rotate(-20deg);
+        }
+
+        .nest-feather-2 {
+            top: 10px;
+            right: 8px;
+            width: 6px;
+            height: 3px;
+            transform: rotate(25deg);
+        }
+
+        .nest-bird {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 8px;
+            background: linear-gradient(45deg, #4A90E2, #87CEEB);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: birdBreath 2s ease-in-out infinite;
+        }
+
+        .nest-bird::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            right: -2px;
+            width: 4px;
+            height: 2px;
+            background: #FFD700;
+            border-radius: 50%;
+        }
+
+        .nest-egg {
+            position: absolute;
+            bottom: 12px;
+            background: linear-gradient(45deg, #F0E68C, #FFF8DC);
+            border-radius: 50%;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .nest-egg-1 {
+            left: 35%;
+            width: 8px;
+            height: 10px;
+        }
+
+        .nest-egg-2 {
+            right: 35%;
+            width: 6px;
+            height: 8px;
+        }
+
+        @keyframes nestFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-2px);
+            }
+        }
+
+        @keyframes birdBreath {
+
+            0%,
+            100% {
+                transform: translateX(-50%) scale(1);
+            }
+
+            50% {
+                transform: translateX(-50%) scale(1.1);
+            }
+        }
+
+        /* HD Size variations - High Resolution */
+        .logo-icon.hd-small {
+            width: 120px;
+            height: 120px;
+        }
+
+        .logo-icon.hd-small .nest-logo {
+            width: 90px;
+            height: 90px;
+        }
+
+        .logo-icon.hd-medium {
+            width: 240px;
+            height: 240px;
+        }
+
+        .logo-icon.hd-medium .nest-logo {
+            width: 180px;
+            height: 180px;
+        }
+
+        .logo-icon.hd-large {
+            width: 480px;
+            height: 480px;
+        }
+
+        .logo-icon.hd-large .nest-logo {
+            width: 360px;
+            height: 360px;
+        }
+
+        .logo-icon.hd-xlarge {
+            width: 720px;
+            height: 720px;
+        }
+
+        .logo-icon.hd-xlarge .nest-logo {
+            width: 540px;
+            height: 540px;
+        }
+
+        .logo-icon.hd-ultra {
+            width: 1200px;
+            height: 1200px;
+        }
+
+        .logo-icon.hd-ultra .nest-logo {
+            width: 900px;
+            height: 900px;
+        }
+
+        .export-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎨 HD Logo Export - The Myo Nest <span class="hd-badge">HIGH DEFINITION</span></h1>
+
+        <div class="instructions">
+            <h3>📋 HD Export Instructions:</h3>
+            <ol>
+                <li><strong>Click the "Export HD PNG" button</strong> for your desired size</li>
+                <li>The browser will automatically download a <strong>high-resolution PNG</strong></li>
+                <li>Each logo is <strong>crystal clear</strong> and perfect for professional use</li>
+                <li>Files are optimized for <strong>print, web, and social media</strong></li>
+            </ol>
+        </div>
+
+        <div class="export-info">
+            <strong>💡 Pro Tip:</strong> The larger sizes (Large, X-Large, Ultra) are perfect for print materials like
+            business cards, brochures, and signage. The smaller sizes work great for web and social media.
+        </div>
+
+        <div class="logo-container">
+            <!-- HD Small Logo -->
+            <div class="logo-size">
+                <h3>HD Small <span class="hd-badge">120×120px</span></h3>
+                <div class="logo-icon hd-small">
+                    <div class="nest-logo">
+                        <div class="nest-base"></div>
+                        <div class="nest-branch nest-branch-1"></div>
+                        <div class="nest-branch nest-branch-2"></div>
+                        <div class="nest-branch nest-branch-3"></div>
+                        <div class="nest-feather nest-feather-1"></div>
+                        <div class="nest-feather nest-feather-2"></div>
+                        <div class="nest-bird"></div>
+                        <div class="nest-egg nest-egg-1"></div>
+                        <div class="nest-egg nest-egg-2"></div>
+                    </div>
+                </div>
+                <br>
+                <button onclick="exportHDLogo('hd-small', 'the-myo-nest-logo-hd-small.png')">Export HD PNG</button>
+            </div>
+
+            <!-- HD Medium Logo -->
+            <div class="logo-size">
+                <h3>HD Medium <span class="hd-badge">240×240px</span></h3>
+                <div class="logo-icon hd-medium">
+                    <div class="nest-logo">
+                        <div class="nest-base"></div>
+                        <div class="nest-branch nest-branch-1"></div>
+                        <div class="nest-branch nest-branch-2"></div>
+                        <div class="nest-branch nest-branch-3"></div>
+                        <div class="nest-feather nest-feather-1"></div>
+                        <div class="nest-feather nest-feather-2"></div>
+                        <div class="nest-bird"></div>
+                        <div class="nest-egg nest-egg-1"></div>
+                        <div class="nest-egg nest-egg-2"></div>
+                    </div>
+                </div>
+                <br>
+                <button onclick="exportHDLogo('hd-medium', 'the-myo-nest-logo-hd-medium.png')">Export HD PNG</button>
+            </div>
+
+            <!-- HD Large Logo -->
+            <div class="logo-size">
+                <h3>HD Large <span class="hd-badge">480×480px</span></h3>
+                <div class="logo-icon hd-large">
+                    <div class="nest-logo">
+                        <div class="nest-base"></div>
+                        <div class="nest-branch nest-branch-1"></div>
+                        <div class="nest-branch nest-branch-2"></div>
+                        <div class="nest-branch nest-branch-3"></div>
+                        <div class="nest-feather nest-feather-1"></div>
+                        <div class="nest-feather nest-feather-2"></div>
+                        <div class="nest-bird"></div>
+                        <div class="nest-egg nest-egg-1"></div>
+                        <div class="nest-egg nest-egg-2"></div>
+                    </div>
+                </div>
+                <br>
+                <button onclick="exportHDLogo('hd-large', 'the-myo-nest-logo-hd-large.png')">Export HD PNG</button>
+            </div>
+
+            <!-- HD X-Large Logo -->
+            <div class="logo-size">
+                <h3>HD X-Large <span class="hd-badge">720×720px</span></h3>
+                <div class="logo-icon hd-xlarge">
+                    <div class="nest-logo">
+                        <div class="nest-base"></div>
+                        <div class="nest-branch nest-branch-1"></div>
+                        <div class="nest-branch nest-branch-2"></div>
+                        <div class="nest-branch nest-branch-3"></div>
+                        <div class="nest-feather nest-feather-1"></div>
+                        <div class="nest-feather nest-feather-2"></div>
+                        <div class="nest-bird"></div>
+                        <div class="nest-egg nest-egg-1"></div>
+                        <div class="nest-egg nest-egg-2"></div>
+                    </div>
+                </div>
+                <br>
+                <button onclick="exportHDLogo('hd-xlarge', 'the-myo-nest-logo-hd-xlarge.png')">Export HD PNG</button>
+            </div>
+
+            <!-- HD Ultra Logo -->
+            <div class="logo-size">
+                <h3>HD Ultra <span class="hd-badge">1200×1200px</span></h3>
+                <div class="logo-icon hd-ultra">
+                    <div class="nest-logo">
+                        <div class="nest-base"></div>
+                        <div class="nest-branch nest-branch-1"></div>
+                        <div class="nest-branch nest-branch-2"></div>
+                        <div class="nest-branch nest-branch-3"></div>
+                        <div class="nest-feather nest-feather-1"></div>
+                        <div class="nest-feather nest-feather-2"></div>
+                        <div class="nest-bird"></div>
+                        <div class="nest-egg nest-egg-1"></div>
+                        <div class="nest-egg nest-egg-2"></div>
+                    </div>
+                </div>
+                <br>
+                <button onclick="exportHDLogo('hd-ultra', 'the-myo-nest-logo-hd-ultra.png')">Export HD PNG</button>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>🎯 HD Quality Features:</h3>
+            <ul>
+                <li><strong>🖼️ Crystal Clear:</strong> Perfect for any size - from business cards to billboards</li>
+                <li><strong>🎨 Professional Grade:</strong> Print-ready quality with sharp edges and vibrant colors</li>
+                <li><strong>📱 Multi-Purpose:</strong> Works for web, print, social media, and marketing materials</li>
+                <li><strong>⚡ Fast Download:</strong> Optimized PNG files that download quickly</li>
+                <li><strong>🔧 Easy to Use:</strong> One-click download with professional filenames</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        async function exportHDLogo(size, filename) {
+            const logoElement = document.querySelector('.logo-icon.' + size);
+
+            try {
+                // Use html2canvas for high-quality export
+                const canvas = await html2canvas(logoElement, {
+                    backgroundColor: 'white',
+                    scale: 4, // 4x resolution for HD quality
+                    useCORS: true,
+                    allowTaint: true,
+                    width: logoElement.offsetWidth,
+                    height: logoElement.offsetHeight
+                });
+
+                // Create download link
+                const link = document.createElement('a');
+                link.download = filename;
+                link.href = canvas.toDataURL('image/png', 1.0); // Maximum quality
+                link.click();
+
+                // Show success message
+                showSuccessMessage(`HD logo exported: ${filename}`);
+
+            } catch (error) {
+                console.error('Export failed:', error);
+                // Fallback method
+                alert(`Right-click on the logo and select "Save image as..." to download ${filename}`);
+            }
+        }
+
+        function showSuccessMessage(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #10b981;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+                z-index: 10000;
+                font-weight: bold;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
+
+    <!-- Include html2canvas for HD export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+
+</html>

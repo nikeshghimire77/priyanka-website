@@ -9,6 +9,7 @@
         content="The Myo Nest provides expert myofunctional therapy to improve breathing, sleep, and oral function. Your safe space for healing. Book your free consultation today.">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <!-- Functions defined immediately -->
     <script>
@@ -231,11 +232,6 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="omd-definition">
-                    <h3>Orofacial Myofunctional Disorders (OMDs)</h3>
-                    <p>OMDs are abnormal movement patterns of the face and mouth that affect breathing, swallowing,
-                        speech, and facial development.</p>
-                </div>
                 <h1 class="hero-title">Myofunctional Therapy for Better Breathing, Sleep, and Smile</h1>
                 <p class="hero-subtitle">We help children, teens, and adults retrain the tongue, lips, and breathing
                     patterns with gentle exercises and daily habits—so you feel rested, speak clearly, and support
@@ -1010,7 +1006,10 @@
                             towards better breathing, sleep, and overall well-being.</p>
                     </div>
 
-                    <form class="clean-form" onsubmit="handleFormSubmit(event)">
+                    <form class="clean-form" method="POST" action="https://formspree.io/f/myznyjgl">
+                        <input type="hidden" name="_subject" value="New Website Inquiry - The Myo Nest">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="confirmation-test.html">
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="contactName">Full Name *</label>
@@ -1126,7 +1125,10 @@
                 <button onclick="closeModal()"
                     style="position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; padding: 10px; cursor: pointer;">X</button>
             </div>
-            <form class="modal-form" onsubmit="handleFormSubmit(event)">
+            <form class="modal-form" method="POST" action="https://formspree.io/f/myznyjgl">
+                <input type="hidden" name="_subject" value="New Consultation Request - The Myo Nest">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="confirmation-test.html">
                 <div class="form-group">
                     <div class="input-wrapper">
                         <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
