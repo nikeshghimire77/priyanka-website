@@ -328,7 +328,7 @@ async function handleFormSubmit(event) {
         phone: formData.get('phone') || 'Not provided',
         message: formData.get('message') || formData.get('concerns') || 'No message provided',
         concerns: formData.get('concerns') || formData.get('primary_concern') || 'Not specified',
-        to_email: 'nikeshghimire77@gmail.com'
+        to_email: 'themyonest@gmail.com'
     };
 
     // Show loading state
@@ -358,7 +358,7 @@ async function handleFormSubmit(event) {
         }
     } catch (error) {
         console.error('EmailJS Error:', error);
-        alert('Sorry, there was a problem sending your message. Please try again or contact us directly at nikeshghimire77@gmail.com');
+        alert('Sorry, there was a problem sending your message. Please try again or contact us directly at themyonest@gmail.com');
     } finally {
         // Reset button state
         if (submitBtn) {
